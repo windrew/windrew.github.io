@@ -6,7 +6,7 @@ highlighter:      rouge
 title:            Mythofys
 tagline:          'A Jekyll theme'
 description:      '가 PS하는 블로그여야 하는 것'
-url:              https://mythofys.github.io
+url:              https://windrew.github.io
 baseurl:          ''
                   # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
@@ -62,4 +62,4 @@ google_analytics: UA-100461102-1
 # own fork.
 hydeout:
   version:          5.0.2
-  repo:             https://github.com/fongandrew/hydeout
+  repo:             https://github.com/windrew/windrew.github.io
