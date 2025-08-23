@@ -3,7 +3,7 @@
 현재 한양대학교 컴퓨터소프트웨어학부 재학 중입니다.</p>
 <hr>
 <h2 id="education">🎓 Education</h2>
-<table>
+<table style="width: 100%; min-width: 800px;">
   <thead>
     <tr>
       <th>기간</th>
@@ -57,7 +57,7 @@
 <hr>
 <h2 id="problem-solving--competitive-programming">🏹 Problem Solving &amp; Competitive Programming</h2>
 <p><a href="https://solved.ac/mythofys"><img src="https://mazassumnida.wtf/api/v2/generate_badge?boj=mythofys" alt="Solved.ac프로필"></a></p>
-<table>
+<table style="width: 100%; min-width: 900px;">
   <thead>
     <tr>
       <th>플랫폼</th>
@@ -68,22 +68,22 @@
   <tbody>
     <tr>
       <td><strong>Baekjoon</strong></td>
-      <td><code>mythofys</code> • Diamond Ⅲ • <strong>1000+</strong> solved</td>
-      <td>2024 KSAAC Winter Contest 검수·출제</td>
+      <td><a href="https://www.acmicpc.net/user/mythofys" target="_blank" id="baekjoon-handle">mythofys</a> • <span id="baekjoon-tier">Loading...</span> • <span id="baekjoon-solved">Loading...</span> problem solved</td>
+      <td>2025 KSAAC Winter Contest 검수·출제</td>
     </tr>
     <tr>
       <td><strong>Codeforces</strong></td>
-      <td>Specialist • 1876 (max) / 1701 (now)</td>
+      <td><a href="https://codeforces.com/profile/mythofys" target="_blank" id="codeforces-handle">mythofys</a> • <span id="codeforces-tier">Loading...</span> • <span id="codeforces-rating">Loading...</span></td>
       <td></td>
     </tr>
     <tr>
       <td><strong>AtCoder</strong></td>
-      <td>5 Kyu • 1181 (max) / 1171 (now)</td>
+      <td><a href="https://atcoder.jp/users/mythofys" target="_blank" id="atcoder-handle">mythofys</a> • <span id="atcoder-tier">Loading...</span> • <span id="atcoder-rating">Loading...</span></td>
       <td></td>
     </tr>
     <tr>
       <td><strong>Euler OJ</strong></td>
-      <td><strong>500+</strong> solved</td>
+      <td><a href="https://euleroj.io/profile/mythofys" target="_blank" id="euler-handle">mythofys</a> • <strong>500+</strong> solved</td>
       <td>미해결 145문제 / 업적 14개</td>
     </tr>
     <tr>
@@ -132,7 +132,7 @@
 </ul>
 <hr>
 <h2 id="projects--development">💻 Projects / Development</h2>
-<table>
+<table style="width: 100%; min-width: 850px;">
   <thead>
     <tr>
       <th>프로젝트</th>
@@ -181,8 +181,120 @@
 <hr>
 <h2 id="contact">✉️ Contact</h2>
 <ul>
-  <li><strong>E-mail</strong> : mythofys@gmail.com</li>
+  <li><strong>E-mail</strong> : mythofys@hanyang.ac.kr</li>
   <li><strong>Blog</strong>   : <a href="https://windrew.tistory.com">https://windrew.tistory.com</a></li>
   <li><strong>GitHub</strong> : <a href="https://github.com/windrew">@windrew</a></li>
 </ul>
 <hr>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const baekjoonHandle = 'mythofys'; // Replace with actual handle
+    const codeforcesHandle = 'mythofys'; // Replace with actual handle
+    const atcoderHandle = 'windrew'; // Replace with actual handle
+
+    // Color definitions for each platform
+    const solvedAcColors = {
+        1: '#ad5600', 2: '#ad5600', 3: '#ad5600', 4: '#ad5600', 5: '#ad5600', // Bronze
+        6: '#435f7a', 7: '#435f7a', 8: '#435f7a', 9: '#435f7a', 10: '#435f7a', // Silver
+        11: '#ec9a00', 12: '#ec9a00', 13: '#ec9a00', 14: '#ec9a00', 15: '#ec9a00', // Gold
+        16: '#27e2a4', 17: '#27e2a4', 18: '#27e2a4', 19: '#27e2a4', 20: '#27e2a4', // Platinum
+        21: '#00b4fc', 22: '#00b4fc', 23: '#00b4fc', 24: '#00b4fc', 25: '#00b4fc', // Diamond
+        26: '#ff0062', 27: '#ff0062', 28: '#ff0062', 29: '#ff0062', 30: '#ff0062'  // Ruby
+    };
+
+    const codeforcesColors = {
+        'newbie': '#808080',
+        'pupil': '#008000',
+        'specialist': '#03a89e',
+        'expert': '#0000ff',
+        'candidate master': '#aa00aa',
+        'master': '#ff8c00',
+        'international master': '#ff8c00',
+        'grandmaster': '#ff0000',
+        'international grandmaster': '#ff0000',
+        'legendary grandmaster': '#ff0000'
+    };
+
+    const atcoderColors = {
+        '8 kyu': '#808080', '7 kyu': '#804000', '6 kyu': '#008000', '5 kyu': '#00c0c0',
+        '4 kyu': '#00c0c0', '3 kyu': '#c0c000', '2 kyu': '#ff8000', '1 kyu': '#ff0000',
+        'dan': '#ff0000'
+    };
+
+    // Helper function to apply color
+    function applyColor(elementId, color) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.style.color = color;
+            element.style.fontWeight = 'bold';
+        }
+    }
+
+    // Fetch Solved.ac (Baekjoon) data using Vercel proxy
+    fetch(`https://api-py.vercel.app/?r=https://solved.ac/api/v3/user/show?handle=${baekjoonHandle}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.tier && data.solvedCount) {
+                // Map tier number to name (simplified for example)
+                const tierNames = {
+                    1: 'Bronze V', 2: 'Bronze IV', 3: 'Bronze III', 4: 'Bronze II', 5: 'Bronze I',
+                    6: 'Silver V', 7: 'Silver IV', 8: 'Silver III', 9: 'Silver II', 10: 'Silver I',
+                    11: 'Gold V', 12: 'Gold IV', 13: 'Gold III', 14: 'Gold II', 15: 'Gold I',
+                    16: 'Platinum V', 17: 'Platinum IV', 18: 'Platinum III', 19: 'Platinum II', 20: 'Platinum I',
+                    21: 'Diamond V', 22: 'Diamond IV', 23: 'Diamond III', 24: 'Diamond II', 25: 'Diamond I',
+                    26: 'Ruby V', 27: 'Ruby IV', 28: 'Ruby III', 29: 'Ruby II', 30: 'Ruby I'
+                };
+                const tierName = tierNames[data.tier] || 'Unknown';
+                document.getElementById('baekjoon-tier').textContent = tierName;
+                document.getElementById('baekjoon-solved').textContent = data.solvedCount;
+                
+                // Apply color based on tier
+                const color = solvedAcColors[data.tier] || '#000000';
+                applyColor('baekjoon-tier', color);
+                applyColor('baekjoon-handle', color);
+            } else {
+                document.getElementById('baekjoon-tier').textContent = 'N/A';
+                document.getElementById('baekjoon-solved').textContent = 'N/A';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Solved.ac data:', error);
+            document.getElementById('baekjoon-tier').textContent = 'Error';
+            document.getElementById('baekjoon-solved').textContent = 'Error';
+        });
+
+    // Fetch Codeforces data using Vercel proxy
+    fetch(`https://api-py.vercel.app/?r=https://codeforces.com/api/user.info?handles=${codeforcesHandle}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.result && data.result.length > 0) {
+                const user = data.result[0];
+                const rank = user.rank || 'N/A';
+                document.getElementById('codeforces-tier').textContent = rank;
+                document.getElementById('codeforces-rating').textContent = `${user.maxRating || 'N/A'} (max) / ${user.rating || 'N/A'} (now)`;
+                
+                // Apply color based on rank
+                const color = codeforcesColors[rank.toLowerCase()] || '#000000';
+                applyColor('codeforces-tier', color);
+                applyColor('codeforces-handle', color);
+            } else {
+                document.getElementById('codeforces-tier').textContent = 'N/A';
+                document.getElementById('codeforces-rating').textContent = 'N/A';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Codeforces data:', error);
+            document.getElementById('codeforces-tier').textContent = 'Error';
+            document.getElementById('codeforces-rating').textContent = 'Error';
+        });
+
+    // AtCoder - Set fixed values as requested
+    document.getElementById('atcoder-tier').textContent = '4 kyu';
+    document.getElementById('atcoder-rating').textContent = '1330 (now) · 1330 (max)';
+    
+    // Apply color for AtCoder 4 kyu (mint/cyan color)
+    const atcoderColor = atcoderColors['4 kyu'] || '#00c0c0';
+    applyColor('atcoder-tier', atcoderColor);
+    applyColor('atcoder-handle', atcoderColor);
+});
+</script>
