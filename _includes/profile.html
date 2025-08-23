@@ -68,7 +68,7 @@
   <tbody>
     <tr>
       <td><strong>Baekjoon</strong></td>
-      <td><a href="https://www.acmicpc.net/user/mythofys" target="_blank" id="baekjoon-handle">mythofys</a> • <span id="baekjoon-tier">Loading...</span> • <span id="baekjoon-solved">Loading...</span> problem solved</td>
+      <td><a href="https://www.acmicpc.net/user/mythofys" target="_blank" id="baekjoon-handle">mythofys</a> • <span id="baekjoon-tier">Loading...</span> • <span id="baekjoon-rating">Loading...</span> • <span id="baekjoon-solved">Loading...</span> problem solved</td>
       <td>2025 KSAAC Winter Contest 검수·출제</td>
     </tr>
     <tr>
@@ -246,6 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
                 const tierName = tierNames[data.tier] || 'Unknown';
                 document.getElementById('baekjoon-tier').textContent = tierName;
+                document.getElementById('baekjoon-rating').textContent = `${data.rating || 0}`;
                 document.getElementById('baekjoon-solved').textContent = data.solvedCount;
                 
                 // Apply color based on tier
@@ -254,12 +255,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 applyColor('baekjoon-handle', color);
             } else {
                 document.getElementById('baekjoon-tier').textContent = 'N/A';
+                document.getElementById('baekjoon-rating').textContent = 'N/A';
                 document.getElementById('baekjoon-solved').textContent = 'N/A';
             }
         })
         .catch(error => {
             console.error('Error fetching Solved.ac data:', error);
             document.getElementById('baekjoon-tier').textContent = 'Error';
+            document.getElementById('baekjoon-rating').textContent = 'Error';
             document.getElementById('baekjoon-solved').textContent = 'Error';
         });
 
