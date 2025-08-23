@@ -6,8 +6,8 @@ highlighter:      rouge
 title:            Mythofys
 tagline:          'A Jekyll theme'
 description:      '가 PS하는 블로그여야 하는 것'
-url:              https://fongandrew.github.io
-baseurl:          '/hydeout'
+url:              https://mythofys.github.io
+baseurl:          ''
                   # the optional subpath of your site, e.g. "/blog"
                   # NB: This applies to all pages in your Jekyll site.
                   # If you want to move just the blog index pages but keep
