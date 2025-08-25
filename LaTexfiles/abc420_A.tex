@@ -1,0 +1,77 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{kotex}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\title{Atcoder ABC420 A번 풀이}
+
+\begin{document}
+
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{myred1}{rgb}{255, 0, 0}
+
+
+% Define a custom style
+\lstdefinestyle{myStyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    keepspaces=true,                 
+    numbers=left,       
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\maketitle
+
+\noindent \href{https://atcoder.jp/contests/abc420/tasks/abc420_a}{문제링크}\\
+
+\noindent $X + Y$가 $12$보다 작거나 같으면 $X + Y$월이 되므로 쉽게 문제를 해결할 수 있습니다.\\\\
+하지만, $X + Y \geq 13$인 순간부터 다시 $1$월이 되므로 $1$, $13$, $25$, $...$이 같은 $1$월이 되어야 하므로 $12p + q$꼴의 값은 $q$월이 됨을 알 수 있습니다. 이를 정리하면 $(X + Y - 1) \% 12 + 1$월이 정답임을 알 수 있습니다.\\
+
+% code block
+\lstset{style=myStyle}
+\begin{lstlisting}[caption=소스코드, language=Matlab]
+#include <stdio.h>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+#include <string.h>
+#include <map>
+#include <queue>
+#include <unordered_map>
+using namespace std;
+typedef long long ll;
+
+ll a[200005];
+
+int main()
+{
+    ll t = 1;
+    while(t--)
+    {
+        ll x,y;
+        scanf("%lld %lld",&x,&y);
+        printf("%lld",(x+y-1)%12+1);
+    }
+}
+
+\end{lstlisting}
+
+
+\end{document}
