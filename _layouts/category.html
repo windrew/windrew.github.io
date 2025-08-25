@@ -7,8 +7,14 @@ layout: page
 {% endunless %}
 
 {% assign category = page.category | default: page.title %}
-{% if site.categories[category] %}
-  {% assign posts = site.categories[category] | sort: 'date' | reverse %}
+{% if category == 'Content' %}
+  {% assign posts_to_show = site.posts %}
+{% else %}
+  {% assign posts_to_show = site.categories[category] %}
+{% endif %}
+
+{% if posts_to_show %}
+  {% assign posts = posts_to_show | sort: 'date' | reverse %}
   {% for post in posts %}
   <article class="post-body">
     <h2 class="post-title">

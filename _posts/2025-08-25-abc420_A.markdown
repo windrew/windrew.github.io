@@ -3,13 +3,16 @@ layout: post
 title:  "AtCoder ABC420-A 문제 풀이"
 slug:   abc420-A-solve
 date:   2025-08-25 00:00:00 +0900
-categories: jekyll update Content
+categories: AtCoder
+tags: [AtCoder, PS, Math, C]
 ---
 
 [문제링크](https://atcoder.jp/contests/abc420/tasks/abc420_a)
 
 {% raw %}$X + Y${% endraw %}가 {% raw %}$12${% endraw %}보다 작거나 같으면 {% raw %}$X + Y${% endraw %}월이 되므로 쉽게 문제를 해결할
 수 있습니다.
+
+<!--more-->
 
 하지만, {% raw %}$X + Y \geq 13${% endraw %}인 순간부터 다시 {% raw %}$1${% endraw %}월이 되므로 {% raw %}$1${% endraw %}, {% raw %}$13${% endraw %}, {% raw %}$25${% endraw %},
 {% raw %}$\dots${% endraw %}이 같은 {% raw %}$1${% endraw %}월이 되어야 하므로 {% raw %}$12p + q${% endraw %}꼴의 값은 {% raw %}$q${% endraw %}월이 됨을 알 수
