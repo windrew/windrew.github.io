@@ -8,12 +8,12 @@ categories: jekyll update Content
 
 [문제링크](https://atcoder.jp/contests/abc420/tasks/abc420_a)
 
-$X + Y$가 $12$보다 작거나 같으면 $X + Y$월이 되므로 쉽게 문제를 해결할
+{% raw %}$X + Y${% endraw %}가 {% raw %}$12${% endraw %}보다 작거나 같으면 {% raw %}$X + Y${% endraw %}월이 되므로 쉽게 문제를 해결할
 수 있습니다.
 
-하지만, $X + Y \geq 13$인 순간부터 다시 $1$월이 되므로 $1$, $13$, $25$,
-$\dots$이 같은 $1$월이 되어야 하므로 $12p + q$꼴의 값은 $q$월이 됨을 알 수
-있습니다. 이를 정리하면 $(X + Y - 1) \% 12 + 1$월이 정답임을 알 수
+하지만, {% raw %}$X + Y \geq 13${% endraw %}인 순간부터 다시 {% raw %}$1${% endraw %}월이 되므로 {% raw %}$1${% endraw %}, {% raw %}$13${% endraw %}, {% raw %}$25${% endraw %},
+{% raw %}$\dots${% endraw %}이 같은 {% raw %}$1${% endraw %}월이 되어야 하므로 {% raw %}$12p + q${% endraw %}꼴의 값은 {% raw %}$q${% endraw %}월이 됨을 알 수
+있습니다. 이를 정리하면 {% raw %}$(X + Y - 1) \% 12 + 1${% endraw %}월이 정답임을 알 수
 있습니다.
 
 소스코드

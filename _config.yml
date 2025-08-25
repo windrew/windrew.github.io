@@ -64,3 +64,8 @@ google_analytics: UA-100461102-1
 hydeout:
   version:          5.0.2
   repo:             https://github.com/windrew/windrew.github.io
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  math_engine: mathjax
