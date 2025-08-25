@@ -1,2 +1,5 @@
 source "https://rubygems.org"
-gemspec
+
+# gem "github-pages", group: :jekyll_plugins
+gem "jekyll", "~> 4.3"
+gem "jekyll-theme-hydeout"
