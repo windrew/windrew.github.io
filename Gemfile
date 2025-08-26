@@ -1,10 +1,2 @@
-source "https://rubygems.org"
-
-gem "jekyll", "~> 4.3"
-gem "jekyll-theme-hydeout"
-gem "jekyll-feed"
-gem "jekyll-gist"
-gem "jekyll-paginate"
-gem "jekyll-include-cache"
-gem "jemoji"
-gem "jekyll-sitemap"
+source 'https://rubygems.org'
+gem 'github-pages', '~> 232', group: :jekyll_plugins
