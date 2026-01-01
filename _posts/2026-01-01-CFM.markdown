@@ -1,12 +1,11 @@
 ---
 layout: post
-title:  "Atcoder 문제 모음"
-slug:   atcoder-problem-collection
+title:  "CF Master(오렌지) 달성 후기 + PS 회고록 + Educational Codeforces Round 186 (Rated for Div. 2) 후기"
+slug:   CFM
 date:   2026-01-01 08:30:00 +0900
 categories: [CodeForces, Problem Solving, Rating]
 tags: [Rating, CodeForces, PS, International Master]
 ---
-# CF Master(오렌지) 달성 후기 + PS 회고록 + Educational Codeforces Round 186 (Rated for Div. 2) 후기
 
 ![mythofys 프로필 이미지](/assets/images/posts/CFM/CFM1.png)
 
