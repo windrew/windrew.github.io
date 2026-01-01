@@ -5,7 +5,7 @@ highlighter:      rouge
 # Setup
 title:            Mythofys
 tagline:          'A Jekyll theme'
-description:      '가 PS하는 블로그여야 하는 것'
+description:      '의 뉴비 탈출기'
 theme:            jekyll-theme-hydeout
 url:              https://windrew.github.io
 baseurl:          ''
