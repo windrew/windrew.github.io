@@ -4,7 +4,7 @@ title:  "CF Master(오렌지) 달성 후기 + PS 회고록 + Educational Codefor
 slug:   CFM
 date:   2026-01-01 08:30:00 +0900
 categories: [CodeForces, Problem Solving, Rating]
-tags: [Rating, CodeForces, PS, International Master]
+tags: [Rating, CodeForces, PS, Master]
 ---
 
 ![mythofys 프로필 이미지](/assets/images/posts/CFM/CFM1.png)
