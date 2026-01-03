@@ -2,7 +2,7 @@
 layout: post
 title:  "제1회 GSHS x SASA 프로그래밍 경시대회 Open Contest 참가 후기"
 slug:   GSHSxSASA
-date:   2026-01-03 10:50:00 +0900
+date:   2026-01-03 11:00:00 +0900
 categories: [Baekjoon, Open Contest]
 tags: [PS]
 ---
