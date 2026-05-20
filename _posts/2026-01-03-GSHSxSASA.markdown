@@ -10,6 +10,8 @@ tags: [PS]
 ## 서론
 복슬님이 팀연습을 같이 돌자 제안하셔서 lntanz([<span style="color: #ff0000">**kolorvxl**</span>](https://codeforces.com/profile/kolorvxl), [<span style="color: #ff8c00">**mythofys**</span>](https://codeforces.com/profile/mythofys), [<span style="color: #0000ff">**6729skl**</span>](https://codeforces.com/profile/Parkkkkkcw)) 팀으로 참여하였습니다.
 
+<!--more-->
+
 제가 역대급 비틱으로 찍은 물레이팅라서 [<span style="color: #ff0000">**kolorvxl**</span>](https://codeforces.com/profile/kolorvxl) 원맨쇼 버스타기가 되었습니다.
 
 부산대에서 만나서 저녁을 먹고 셋을 돌기로 약속되었는데, 저희 집이 부산대에서 지하철을 타고 한 시간 반 거리라 3시에 집에서 출발하고 11시 반에 도착하는 일정이 되어버렸습니다.

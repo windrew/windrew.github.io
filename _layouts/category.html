@@ -24,23 +24,23 @@ layout: page
     </h2>
     {% include post-meta.html post=post %}
 
-    {% if post.excerpt %}
+    {% assign has_more = post.content | contains: '<!--more-->' %}
+    {% if has_more %}
       {{ post.excerpt }}
     {% else %}
-      {{ post.content }}
+      {{ post.content | split: "</p>" | first | append: "</p>" }}
     {% endif %}
 
-    {% if post.excerpt %}
-      {% capture content_words %}
-        {{ post.content | number_of_words }}
-      {% endcapture %}
-      {% capture excerpt_words %}
-        {{ post.excerpt | number_of_words }}
-      {% endcapture %}
+    {% capture content_words %}{{ post.content | strip_html | number_of_words }}{% endcapture %}
+    {% if has_more %}
+      {% capture excerpt_words %}{{ post.excerpt | strip_html | number_of_words }}{% endcapture %}
+    {% else %}
+      {% capture first_para %}{{ post.content | split: "</p>" | first | append: "</p>" }}{% endcapture %}
+      {% capture excerpt_words %}{{ first_para | strip_html | number_of_words }}{% endcapture %}
+    {% endif %}
 
-      {% if content_words != excerpt_words %}
-        <a href="{{ post.url | relative_url }}">More &hellip;</a>
-      {% endif %}
+    {% if content_words != excerpt_words %}
+      <a href="{{ post.url | relative_url }}">More &hellip;</a>
     {% endif %}
   </article>
   {% endfor %}
