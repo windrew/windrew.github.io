@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "2026 KOI 2교시 풀이"
-slug:   GSHSxSASA
+slug:   2026KOI
 date:   2026-05-20 12:00:00 +0900
 categories: [KOI]
 tags: [PS]

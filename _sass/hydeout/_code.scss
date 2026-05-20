@@ -7,7 +7,7 @@
 
 code,
 pre {
-  font-family: variables.$code-font-family;
+  font-family: "JetBrains Mono", variables.$code-font-family;
 }
 
 code {
@@ -27,7 +27,7 @@ pre {
 
 pre code {
   background-color: transparent;
-  color: inherit;
+  color: inherit; // This might be the issue, let's keep an eye
   font-size: 100%;
   padding: 0;
 }
@@ -37,14 +37,21 @@ pre code {
   background-color: #282c34; // Darker background (One Dark style)
   color: #abb2bf;
   border-radius: 0.25rem;
-  font-size: 0.8rem;
-  line-height: 1.4;
+  font-size: 0.85rem;
+  line-height: 1.5;
   margin-bottom: 1rem;
   padding: 1rem;
 
   pre {
     margin-bottom: 0;
     overflow-x: auto;
+    color: #abb2bf !important; // Base text color
+  }
+
+  code {
+    color: inherit !important;
+    background: transparent !important;
+    padding: 0 !important;
   }
 
   .lineno {

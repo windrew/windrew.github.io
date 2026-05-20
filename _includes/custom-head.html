@@ -4,6 +4,11 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
     onload="renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}] });"></script>
 
+<!-- Google Fonts: JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
 <!-- Code block copy button styling -->
 <style>
   .highlight {
@@ -13,21 +18,23 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.75rem;
-    color: #444;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: #abb2bf;
+    background-color: #3e4451;
+    border: 1px solid #4b5263;
     border-radius: 4px;
     cursor: pointer;
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     z-index: 10;
   }
   .highlight:hover .copy-code-button {
     opacity: 1;
   }
   .copy-code-button:hover {
-    background-color: #eee;
+    background-color: #4b5263;
+    color: #ffffff;
   }
 </style>
