@@ -59,3 +59,12 @@
 .highlight .vg { color: #e06c75; } /* Name.Variable.Global */
 .highlight .vi { color: #e06c75; } /* Name.Variable.Instance */
 .highlight .il { color: #d19a66; } /* Literal.Number.Integer.Long */
+
+/* Fallback for some Rouge versions */
+.highlight pre .k, .highlight pre .s, .highlight pre .c, .highlight pre .o, .highlight pre .n { color: inherit; }
+.highlight pre .k { color: #c678dd; }
+.highlight pre .s, .highlight pre .s1, .highlight pre .s2 { color: #98c379; }
+.highlight pre .c, .highlight pre .c1, .highlight pre .cm { color: #5c6370; font-style: italic; }
+.highlight pre .nf { color: #61afef; }
+.highlight pre .nb, .highlight pre .nc { color: #e5c07b; }
+

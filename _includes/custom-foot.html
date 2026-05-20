@@ -1,6 +1,8 @@
 <!-- Code Copy Button -->
 <script>
-  document.querySelectorAll('.highlight').forEach((copyButtonWrapper) => {
+  document.querySelectorAll('div.highlight').forEach((copyButtonWrapper) => {
+    if (copyButtonWrapper.querySelector('.copy-code-button')) return;
+
     const copyButton = document.createElement('button');
     copyButton.className = 'copy-code-button';
     copyButton.type = 'button';
@@ -9,7 +11,8 @@
     copyButtonWrapper.append(copyButton);
 
     copyButton.addEventListener('click', () => {
-      const code = copyButtonWrapper.querySelector('pre code').innerText;
+      const codeElement = copyButtonWrapper.querySelector('pre code') || copyButtonWrapper.querySelector('pre');
+      const code = codeElement.innerText;
       navigator.clipboard.writeText(code).then(() => {
         copyButton.innerText = 'Copied!';
         setTimeout(() => {
