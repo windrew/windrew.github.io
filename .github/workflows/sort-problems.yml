@@ -1,0 +1,40 @@
+name: Auto Sort Problem List
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '_posts/*valuable_problems*'
+      - 'scripts/sort_problems.py'
+
+permissions:
+  contents: write
+
+jobs:
+  sort:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Run sorting script
+        run: |
+          # Find all files that might contain the problem list
+          find _posts -name "*valuable_problems*" -exec python scripts/sort_problems.py {} +
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add _posts/*valuable_problems*
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto-sort problem list [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
+          fi
