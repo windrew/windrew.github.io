@@ -3,8 +3,8 @@ layout: post
 title:  "DOJ Beginner Contest 2 초중고등부 후기 및 풀이"
 slug:   DOJBC2
 date:   2026-05-31 17:40:00 +0900
-categories: [CodeForces]
-tags: [PS, CodeForces]
+categories: [DOJ]
+tags: [PS, DOJ]
 ---
 
 스레드에서 따콘 강매를 당해서 따콘을 쳤습니다.
