@@ -14,3 +14,4 @@ tags: [PS, CodeForces]
 [Div.2 813D](https://codeforces.com/contest/1712/problem/D) (2000)
 [Div.2 1089C2](https://codeforces.com/contest/2210/problem/C2) (2100)
 [Div.2 1089D](https://codeforces.com/contest/2210/problem/CD) (2100)
+[Div.2 848D](https://codeforces.com/contest/1778/problem/D) (2100)

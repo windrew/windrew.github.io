@@ -1,0 +1,660 @@
+---
+layout: post
+title:  "DOJ Beginner Contest 2 초중고등부 후기 및 풀이"
+slug:   DOJBC2
+date:   2026-05-31 17:40:00 +0900
+categories: [CodeForces]
+tags: [PS, CodeForces]
+---
+
+스레드에서 따콘 강매를 당해서 따콘을 쳤습니다.
+
+어짜피 할 것도 없어서 시간 나는 김에 초등부, 중등부, 고등부를 전부 쳐보기로 하였습니다.
+
+제 실력으로는 고등부에서 살아남을 수 있을 리가 없음이 분명했고, 초등부로 도주하였습니다.
+
+## 초등부
+![image](/assets/images/posts/DOJBC2/scoreboard1.png)
+
+당연히 올솔 할 리가 없다고 생각했는데 생각보다 많이 쉬워서 40분만에 올솔했습니다.
+
+### A
+
+모든 지점에 모든 카드를 다 끼워보면 됩니다.
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define mod 998244353
+#define inf 4000000000000000000
+#define siz 524288
+#pragma GCC optimize("O3")
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+
+ll a[200005];
+
+int main()
+{
+    ll t = 1LL;
+    //scanf("%lld",&t);
+    while(t--)
+    {
+        ll i,j,k,n,m,ans = 0;
+        scanf("%lld",&n);
+        for(i=1;i<=n;i++)
+        {
+            scanf("%lld",&a[i]);
+        }
+        for(j=1;j<=3;j++)
+        {
+            ll now = 0;
+            for(i=1;i<=n+1;i++)
+            {
+                now += a[i] == a[i-1];
+            }
+            for(i=1;i<=n+1;i++)
+            {
+                now -= a[i] == a[i-1];
+                if(a[i] != j && a[i-1] != j && now == 0)ans++;
+                now += a[i] == a[i-1];
+            }
+        }
+        printf("%lld",ans);
+    }
+}
+```
+
+### B
+
+$x$좌표 순으로 정렬해서 $y$좌표가 본인보다 작은 점의 $dp$값 $+1$이 만들 수 있는 수열에서 가능한 본인의 가장 나중 위치입니다. 반대로도 해주면 가장 먼저 나올 수 있는 위치도 구할 수 있습니다. 이 사이 위치는 전부 구성가능함을 쉽게 증명할 수 있습니다. 이를 가지고 판별해주면 됩니다.
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define mod 998244353
+#define inf 4000000000000000000
+#define siz 524288
+#pragma GCC optimize("O3")
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+
+ll dp1[5005],dp2[5005];
+
+struct A
+{
+    ll x,y;
+}d[5005];
+
+bool cmp(A i,A j)
+{
+    if(i.x == j.x)return i.y < j.y;
+    return i.x < j.x;
+}
+
+int main()
+{
+    ll t = 1LL;
+    //scanf("%lld",&t);
+    while(t--)
+    {
+        ll i,j,k,n,l,m,ans = 0;
+        scanf("%lld %lld %lld",&n,&l,&k);
+        for(i=1;i<=n;i++)
+        {
+            scanf("%lld %lld",&d[i].x,&d[i].y);
+        }
+        sort(d+1,d+1+n,cmp);
+        for(i=1;i<=n;i++)
+        {
+            dp1[i] = 1;
+            for(j=1;j<i;j++)
+            {
+                if(d[j].y <= d[i].y)dp1[i] = max(dp1[i],dp1[j] + 1);
+            }
+        }
+        for(i=n;i>=1;i--)
+        {
+            dp2[i] = 1;
+            for(j=i+1;j<=n;j++)
+            {
+                if(d[j].y >= d[i].y)dp2[i] = max(dp2[i],dp2[j] + 1);
+            }
+        }
+        for(i=1;i<=n;i++)
+        {
+            if(dp1[i] >= k && dp2[i] >= l - k + 1)ans++;
+            //printf("%lld %lld\n",dp1[i],dp2[i]);
+        }
+        printf("%lld",ans);
+    }
+}
+```
+
+### C
+
+각 높이가 $A_i$인 막대가 $i$번째에 세워져 있다고 할 때, 보이는 막대에 해당하는 값들은 남겨놓아도 문제가 없고, 해당 막대들만 남기는 것이 최적임을 증명할 수 있습니다.
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define mod 998244353
+#define inf 4000000000000000000
+#define siz 524288
+#pragma GCC optimize("O3")
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+
+ll a[200005];
+
+int main()
+{
+    ll t = 1LL;
+    //scanf("%lld",&t);
+    while(t--)
+    {
+        ll i,j,k,n,l,m,ans = 0,mx = 0;
+        scanf("%lld",&n);
+        for(i=1;i<=n;i++)
+        {
+            scanf("%lld",&a[i]);
+        }
+        for(i=1;i<=n;i++)
+        {
+            mx = max(a[i],mx);
+            if(mx != a[i])ans++;
+        }
+        printf("%lld",ans);
+    }
+}
+```
+
+### D
+
+코포 어디에서 $X = 1$인 문제를 보았습니다. $X = 1$일 경우 $k$개 정점의 센트로이드가 답임을 쉽게 증명할 수 있습니다. 여기서 우선순위 큐를 활용해서 정점이 많은 자식 방향으로 계속해서 붙여주는 것이 답입니다. 증명은 안해서 모르겠습니다..
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define mod 998244353
+#define inf 4000000000000000000
+#define siz 524288
+#pragma GCC optimize("O3")
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+
+vector < ll > adj[200005];
+ll a[200005],dist[200005],chk[200005],cost[200005];
+priority_queue < pair < ll, ll > > pq;
+
+void dfs(ll node,ll par)
+{
+    ll i;
+    for(i=0;i<adj[node].size();i++)
+    {
+        if(adj[node][i] == par)continue;
+        dfs(adj[node][i],node);
+        cost[node] += cost[adj[node][i]];
+    }
+}
+
+ll cent(ll node,ll par,ll k)
+{
+    ll i;
+    for(i=0;i<adj[node].size();i++)
+    {
+        if(adj[node][i] == par)continue;
+        if(cost[adj[node][i]] > k/2)return cent(adj[node][i],node,k);
+    }
+    return node;
+}
+
+void dfs2(ll node,ll par)
+{
+    ll i;
+    if(par != -1)dist[node] = dist[par] + 1;
+    for(i=0;i<adj[node].size();i++)
+    {
+        if(adj[node][i] == par)continue;
+        dfs2(adj[node][i],node);
+        cost[node] += cost[adj[node][i]];
+    }
+}
+
+int main()
+{
+    ll t = 1LL;
+    //scanf("%lld",&t);
+    while(t--)
+    {
+        ll i,j,k,n,l,m,x,ans = 0;
+        scanf("%lld %lld %lld",&n,&k,&x);
+        for(i=1;i<=k;i++)
+        {
+            scanf("%lld",&a[i]);
+            cost[a[i]]++;
+        }
+        for(i=1;i<n;i++)
+        {
+            ll u,v;
+            scanf("%lld %lld",&u,&v);
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        dfs(1,-1);
+        ll c = cent(1,-1,k);
+        for(i=1;i<=n;i++)
+        {
+            cost[i] = 0;
+        }
+        for(i=1;i<=k;i++)
+        {
+            cost[a[i]]++;
+        }
+        dfs2(c,-1);
+        for(i=1;i<=k;i++)
+        {
+            ans += dist[a[i]];
+        }
+        x--;
+        //printf("%lld\n",ans);
+        for(i=0;i<adj[c].size();i++)
+        {
+            pq.push({cost[adj[c][i]],adj[c][i]});
+        }
+        chk[c] = 1;
+        //printf("%lld\n",c);
+        while(x)
+        {
+            ll node = pq.top().second;
+            ll ncost = pq.top().first;
+            ans -= ncost;
+            chk[node] = 1;
+            pq.pop();
+            for(i=0;i<adj[node].size();i++)
+            {
+                if(chk[adj[node][i]])continue;
+                pq.push({cost[adj[node][i]],adj[node][i]});
+            }
+            x--;
+        }
+        printf("%lld",ans);
+    }
+}
+```
+
+## 중등부
+
+중복 응시는 좀 그래서 열심히 4시간을 기다리고 중등부를 쳤습니다.
+
+![image](/assets/images/posts/DOJBC2/scoreboard2.png)
+
+초등부 A = 중등부 A, 초등부 C = 중등부 B이므로 AB는 생략하겠습니다.
+
+### C
+
+$A_i$가 작은 값부터 보면서 $A_i$가 최소 막대인 경우 가능한 최대 길이를 구해서 그 둘의 곱 중 최댓값을 구하면 됩니다. $p_i - i$ 값들을 잘 관리하면 투 포인터를 이용해서 $O(N^2)$에 풀 수 있습니다.
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#define mod 998244353
+#define inf 4000000000000000000
+#define siz 524288
+#pragma GCC optimize("O3")
+#pragma GCC optimize("Ofast")
+#pragma GCC optimize("unroll-loops")
+
+ll a[7005],v[7005],b[7005],pref[7005];
+
+ll can(ll n,ll x)
+{
+    ll i,tail = 0,cnt = 1,ret = 0;
+    for(i=1;i<=n;i++)
+    {
+        if(v[i])b[cnt++] = i - cnt;
+    }
+    cnt--;
+    for(i=1;i<=cnt;i++)
+    {
+        pref[i] = pref[i-1] + b[i];
+    }
+    pref[cnt+1] = inf;
+    for(i=1;i<=cnt;i++)
+    {
+        while(1)
+        {
+            ll mid = (tail + 1 + i) / 2;
+            if(pref[tail+1] - pref[mid-1] - b[mid] * (tail+1-mid+1) + b[mid] * (mid-1-i+1) - pref[mid-1] + pref[i-1] > x)break;
+            tail++;
+        }
+        ret = max(ret,tail - i + 1);
+    }
+    return ret;
+}
+
+int main()
+{
+    ll t = 1LL;
+    //scanf("%lld",&t);
+    while(t--)
+    {
+        ll i,j,k,n,m,ans = 0,x;
+        scanf("%lld %lld",&n,&x);
+        vector < pair < ll, ll > > now;
+        for(i=1;i<=n;i++)
+        {
+            scanf("%lld",&a[i]);
+            now.push_back({a[i],i});
+            v[i] = 1;
+        }
+        sort(now.begin(),now.end());
+        for(i=0;i<n;i++)
+        {
+            ans = max(ans,now[i].first * can(n,x));
+            //printf("%lld ",ans);
+            v[now[i].second] = 0;
+        }
+        printf("%lld",ans);
+    }
+}
+```
+
+### D
+
+서브태스크 4를 생각해봅시다. 가운데 있는 값 3개가 차례로 121, 212인 경우를 제외하고는 둘 중 더 많은 값이 최종으로 남는 값이 됩니다. 121, 212 꼴의 경우 처음으로 해당 꼴에서 어긋나는 값이 마지막 값이 됩니다. 여기 이분탐색을 섞으면 서브태스크 5, 6을 맞출 수 있고, $K$가 이보다 더 작을 경우 연속한 일정 길이의 부분수열에 대한 답을 구하면 된다는 것을 안다면 $A_i$ 제한과 세그먼트 트리를 이용해 서브태스크 7, 8을 맞출 수 있습니다. 여기에 쿼리 구간 전부를 pbs로 관리해주는 것을 섞으면 풀태스크를 맞출 수 있습니다.
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+typedef int ll;
+#define mod 998244353
+#define inf 4000000000000000000
+#define siz 524288
+ll a[500005],b[500005];
+pair < ll, ll > c[500005];
+
+ll val1[siz],val2[siz];
+ll tree1_idxl[siz*2],tree1_idxr[siz*2];
+ll tree2_idxl[siz*2],tree2_idxr[siz*2];
+
+void init()
+{
+    ll i;
+    for(i=0;i<siz*2;i++)
+    {
+        tree1_idxl[i] = siz;
+        tree2_idxl[i] = siz;
+        tree1_idxr[i] = -1;
+        tree2_idxr[i] = -1;
+    }
+}
+
+void update1(ll idx,ll v)
+{
+    val1[idx] += v;
+    ll p = siz + idx;
+    if(val1[idx] != 0)tree1_idxl[p] = idx;
+    else tree1_idxl[p] = siz;
+    if(val1[idx] != 0)tree1_idxr[p] = idx;
+    else tree1_idxr[p] = -1;
+    for(p/=2;p>0;p/=2)
+    {
+        tree1_idxl[p] = min(tree1_idxl[p*2],tree1_idxl[p*2+1]);
+        tree1_idxr[p] = max(tree1_idxr[p*2],tree1_idxr[p*2+1]);
+    }
+}
+
+void update2(ll idx,ll v)
+{
+    val2[idx] += v;
+    ll p = siz + idx;
+    if(val2[idx] != 0)tree2_idxl[p] = idx;
+    else tree2_idxl[p] = siz;
+    if(val2[idx] != 0)tree2_idxr[p] = idx;
+    else tree2_idxr[p] = -1;
+    for(p/=2;p>0;p/=2)
+    {
+        tree2_idxl[p] = min(tree2_idxl[p*2],tree2_idxl[p*2+1]);
+        tree2_idxr[p] = max(tree2_idxr[p*2],tree2_idxr[p*2+1]);
+    }
+}
+
+ll walk1r(ll l,ll r)
+{
+    ll ret = siz;
+    for(l+=siz,r+=siz;l<=r;l/=2,r/=2)
+    {
+        if(l%2 == 1)ret = min(ret,tree1_idxl[l++]);
+        if(r%2 == 0)ret = min(ret,tree1_idxl[r--]);
+    }
+    return ret;
+}
+
+ll walk1l(ll l,ll r)
+{
+    ll ret = -1;
+    for(l+=siz,r+=siz;l<=r;l/=2,r/=2)
+    {
+        if(l%2 == 1)ret = max(ret,tree1_idxr[l++]);
+        if(r%2 == 0)ret = max(ret,tree1_idxr[r--]);
+    }
+    if(ret == -1)return siz;
+    return ret;
+}
+
+ll walk2r(ll l,ll r)
+{
+    ll ret = siz;
+    for(l+=siz,r+=siz;l<=r;l/=2,r/=2)
+    {
+        if(l%2 == 1)ret = min(ret,tree2_idxl[l++]);
+        if(r%2 == 0)ret = min(ret,tree2_idxl[r--]);
+    }
+    return ret;
+}
+
+ll walk2l(ll l,ll r)
+{
+    ll ret = -1;
+    for(l+=siz,r+=siz;l<=r;l/=2,r/=2)
+    {
+        if(l%2 == 1)ret = max(ret,tree2_idxr[l++]);
+        if(r%2 == 0)ret = max(ret,tree2_idxr[r--]);
+    }
+    if(ret == -1)return siz;
+    return ret;
+}
+
+ll can(ll l,ll r)
+{
+    ll mid = (l+r)/2;
+    ll f = val1[mid-1];
+    ll s = val1[mid];
+    ll t = val1[mid+1];
+    if(mid % 2 == 1)
+    {
+        f--;
+        t--;
+        s++;
+    }
+    f++;
+    t++;
+    if(f == 0 && s == 1 && t == 0)
+    {
+        ll idx1,idx2;
+        if(mid % 2 != 0)
+        { 
+            idx1 = walk1r(mid+2,r);
+            idx2 = walk1l(l,mid-2);
+        }
+        else
+        {
+            idx1 = walk2r(mid+2,r);
+            idx2 = walk2l(l,mid-2);
+        }
+        if(min(abs(idx1 - mid),abs(idx2 - mid)) > abs(l - mid))return(r - l + 1) % 4 == 1;
+        if(abs(idx1 - mid) < abs(idx2 - mid))
+        {
+            if(abs(idx1 - mid) % 2)return 1; 
+            return 0; 
+        }
+        else
+        {
+            if(abs(idx2 - mid) % 2)return 1; 
+            return 0; 
+        }
+    }
+    else if(f == 1 && s == 0 && t == 1)
+    {
+        ll idx1,idx2;
+        if(mid % 2 != 0)
+        {
+            idx1 = walk2r(mid+2,r);
+            idx2 = walk2l(l,mid-2);
+        }
+        else
+        {
+            idx1 = walk1r(mid+2,r);
+            idx2 = walk1l(l,mid-2);
+        }
+        if(min(abs(idx1 - mid),abs(idx2 - mid)) > abs(l - mid))return(r - l + 1) % 4 == 3; 
+        if(abs(idx1 - mid) < abs(idx2 - mid))
+        {
+            if(abs(idx1 - mid) % 2)return 0; 
+            return 1; 
+        }
+        else
+        {
+            if(abs(idx2 - mid) % 2)return 0; 
+            return 1; 
+        }
+    }
+    else
+    {
+        return f + s + t >= 2;
+    }
+}
+
+struct A
+{
+    ll l,r,ans,idx;
+}qry[500005];
+
+bool cmp(A i,A j)
+{
+    return i.idx < j.idx;
+}
+
+void pbs(ll s,ll e,ll l,ll r)
+{
+    if(s == e)
+    {
+        ll i;
+        for(i=l;i<=r;i++)
+        {
+            qry[i].ans = c[s].first;
+        }
+        return;
+    }
+    if(l > r)return;
+    ll mid = (s+e)/2;
+    ll tail = l,head = r;
+    while(tail <= head)
+    {
+        while(tail <= head)
+        {
+            if(!can(qry[tail].l,qry[tail].r))break;
+            tail++;
+        }
+        while(tail <= head)
+        {
+            if(can(qry[head].l,qry[head].r))break;
+            head--;
+        }
+        if(tail > head)break;
+        swap(qry[tail],qry[head]);
+        tail++;
+        head--;
+    }
+    ll i,nmid = (s+mid)/2;
+    for(i=mid;i>nmid;i--)
+    {
+        update1(c[i].second,-1);
+        update2(c[i].second,-1);
+    }
+    pbs(s,mid,l,head);
+    for(i=nmid+1;i<=mid;i++)
+    {
+        update1(c[i].second,1);
+        update2(c[i].second,1);
+    }
+    nmid = (mid+1+e)/2;
+    for(i=mid+1;i<=nmid;i++)
+    {
+        update1(c[i].second,1);
+        update2(c[i].second,1);
+    }
+    pbs(mid+1,e,tail,r);
+    for(i=nmid;i>mid;i--)
+    {
+        update1(c[i].second,-1);
+        update2(c[i].second,-1);
+    }
+}
+
+int main()
+{
+    init();
+    ll t = 1LL;
+    while(t--)
+    {
+        ll i,j,k,n,m,ans = 0,x;
+        cin >> n >> k;
+        for(i=1;i<=n;i++)
+        {
+            cin >> a[i];
+            c[i] = {a[i],i};
+            if(i % 2)update1(i,-1);
+            else update2(i,-1);
+        }
+        sort(c+1,c+1+n);
+        for(i=1;i<=n-2*k;i++)
+        {
+            qry[i].l = i;
+            qry[i].r = i+2*k;
+            qry[i].idx = i;
+        }
+        ll mid = (1+n)/2;
+        for(i=1;i<=mid;i++)
+        {
+            update1(c[i].second,1);
+            update2(c[i].second,1);
+        }
+        pbs(1,n,1,n-2*k);
+        sort(qry+1,qry+1+n-2*k,cmp);
+        for(i=1;i<=n-2*k;i++)
+        {
+            cout << qry[i].ans << " ";
+        }
+    }
+}
+```
+
+기존에 재귀 세그먼트 트리를 사용하다가 tl이 상당히 빡빡하여 비재귀 세그먼트 트리로 바꾸었습니다.
+
+## 고등부
+..는 A, B, C가 초등부, 중등부와 겹치고, D는 제가 풀 수 있었을 리가 없었기 때문에 들은 D의 풀이에 대해 러프한 스케치 정도만 언급하려고 합니다.
+
+![image](/assets/images/posts/DOJBC2/scoreboard3.png)
+
+### D
+
+섭태 5번이 금광 세그먼트 트리를 쓰면 되고, 섭태 4번이 mo's를 쓰면 된다고 알고 있습니다. 풀 태스크는 트라이를 활용하면 트라이에서의 lca 문제로 환원이 가능해져서 쿼리당 로그나 로그 제곱 정도에 풀 수 있다고 합니다.
+
+아마도 고등부를 rated로 쳤으면 300점은 받았을 것으로 보이는데, 괜히 초등부 쳐서 고점띄워서 rating 손해를 거하게 봤습니다. ~~역시 바보인게 틀림없습니다.~~

@@ -190,7 +190,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const baekjoonHandle = 'mythofys'; // Replace with actual handle
     const codeforcesHandle = 'mythofys'; // Replace with actual handle
-    const atcoderHandle = 'windrew'; // Replace with actual handle
+    const atcoderHandle = 'mythofys'; // Replace with actual handle
 
     // Color definitions for each platform
     const solvedAcColors = {
@@ -213,12 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
         'grandmaster': '#ff0000',
         'international grandmaster': '#ff0000',
         'legendary grandmaster': '#ff0000'
-    };
-
-    const atcoderColors = {
-        '8 kyu': '#808080', '7 kyu': '#804000', '6 kyu': '#008000', '5 kyu': '#00c0c0',
-        '4 kyu': '#00c0c0', '3 kyu': '#c0c000', '2 kyu': '#ff8000', '1 kyu': '#ff0000',
-        'dan': '#ff0000'
     };
 
     // Helper function to apply color
@@ -291,13 +285,55 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('codeforces-rating').textContent = 'Error';
         });
 
-    // AtCoder - Set fixed values as requested
-    document.getElementById('atcoder-tier').textContent = '4 kyu';
-    document.getElementById('atcoder-rating').textContent = '1330 (now) · 1330 (max)';
-    
-    // Apply color for AtCoder 4 kyu (mint/cyan color)
-    const atcoderColor = atcoderColors['4 kyu'] || '#00c0c0';
-    applyColor('atcoder-tier', atcoderColor);
-    applyColor('atcoder-handle', atcoderColor);
+    // Fetch AtCoder data using Vercel proxy
+    fetch(`https://api-py.vercel.app/?r=https://atcoder.jp/users/${atcoderHandle}/history/json`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.length > 0) {
+                const ratedHistory = data.filter(d => d.IsRated);
+                if (ratedHistory.length > 0) {
+                    const latest = ratedHistory[ratedHistory.length - 1];
+                    const currentRating = latest.NewRating;
+                    const maxRating = Math.max(...ratedHistory.map(d => d.NewRating));
+
+                    document.getElementById('atcoder-rating').textContent = `${currentRating} (now) · ${maxRating} (max)`;
+
+                    // Determine tier and color based on standard AtCoder ratings
+                    let tier = 'Unknown';
+                    let color = '#000000';
+
+                    if (currentRating < 400) { tier = '12-9 kyu'; color = '#808080'; }
+                    else if (currentRating < 800) { tier = '8-7 kyu'; color = '#804000'; }
+                    else if (currentRating < 1200) { tier = '6-5 kyu'; color = '#008000'; }
+                    else if (currentRating < 1600) { 
+                        tier = currentRating < 1400 ? '4 kyu' : '3 kyu'; 
+                        color = '#00c0c0'; 
+                    }
+                    else if (currentRating < 2000) { 
+                        tier = currentRating < 1800 ? '2 kyu' : '1 kyu'; 
+                        color = '#0000ff'; 
+                    }
+                    else if (currentRating < 2400) { tier = '1-4 dan'; color = '#c0c000'; }
+                    else if (currentRating < 2800) { tier = '5-8 dan'; color = '#ff8000'; }
+                    else { tier = '9- dan'; color = '#ff0000'; }
+
+                    document.getElementById('atcoder-tier').textContent = tier;
+                    applyColor('atcoder-tier', color);
+                    applyColor('atcoder-handle', color);
+                } else {
+                    document.getElementById('atcoder-tier').textContent = 'Unrated';
+                    document.getElementById('atcoder-rating').textContent = '0 (now)';
+                }
+            } else {
+                document.getElementById('atcoder-tier').textContent = 'N/A';
+                document.getElementById('atcoder-rating').textContent = 'N/A';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching AtCoder data:', error);
+            document.getElementById('atcoder-tier').textContent = 'Error';
+            document.getElementById('atcoder-rating').textContent = 'Error';
+        });
+
 });
 </script>
