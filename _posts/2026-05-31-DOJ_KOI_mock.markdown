@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "DOJ Beginner Contest 2 초중고등부 후기 및 풀이"
-slug:   DOJBC2
+title:  "KOI 2nd Round Mock 1 초중고등부 후기 및 풀이"
+slug:   DOJ_KOI2
 date:   2026-05-31 17:40:00 +0900
 categories: [DOJ]
 tags: [PS, DOJ]
